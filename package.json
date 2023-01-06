@@ -1,0 +1,56 @@
+{
+  "name": "fe-school-management",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
+    "@types/node": "^16.11.36",
+    "@types/react": "^17.0.47",
+    "@types/react-dom": "^17.0.17",
+    "@types/react-router-dom": "^5.3.3",
+    "axios": "^0.27.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.3",
+    "react-scroll": "^1.8.9",
+    "recharts": "^2.2.0",
+    "typescript": "^4.7.2"
+  },
+  "scripts": {
+    "start": "cross-env PORT=4040 react-scripts start",
+    "build": "react-scripts build",
+    "dev": "cross-env PORT=4040 nodemon  react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "api": "json-server --host 0.0.0.0 --port 6060 --watch json-server/db.json --routes json-server/routes.json"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-scroll": "^1.8.5",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.18.0",
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "^2.7.1",
+    "react-scripts": "5.0.1"
+  }
+}
