@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -18,6 +18,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listitems";
+import { useAuth0 } from "@auth0/auth0-react";
+import * as dashboardService from "../../services/dashboardService";
+import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PageLoader } from "../page-loader";
+import { SignUpForm } from "../../pages/signup-page";
 import Chart from "./chart";
 import Deposits from "./deposits";
 import Orders from "./orders";
@@ -212,6 +219,58 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
+  const history = useHistory();
+  const { user, getAccessTokenSilently } = useAuth0();
+
+  if (!user) {
+    return null;
+  }
+  const [state = { notLoaded: true }, setState] = useState(null);
+  useEffect(() => {
+    const asyncCallback = async () => {
+      const accessToken = await getAccessTokenSilently();
+      const { data, error } = await dashboardService.getUserDetails(
+        accessToken,
+        {
+          profile: user?.profile,
+        }
+      );
+      console.log("data dashboard", data, error)
+      if (error) {
+        setState(null);
+      }
+      setState(data);
+    };
+
+    asyncCallback();
+  }, []);
+  if (!state) {
+    history.push("/signup");
+  }
+  if (state?.notLoaded) {
+    //return some loading component(s) (or nothing to avoid flicker)
+    return <PageLoader />; // -or- return <div/>
+  }
   return <DashboardContent />;
-}
+
+  // const accessToken = await getAccessTokenSilently();
+  // const { data, error } = await dashboardService.getUserDetails(accessToken, {
+  //   profile: user?.profile,
+  // });
+  // if (!error) {
+  //   console.log("data", data);
+  //   return <DashboardContent />;
+  //   // navigate to dashboard page
+  //   // toast.success("Successfully completed registration");
+  //   // history.push("/dashboard");
+  // } else {
+  //   console.log("error", error);
+  //   // history.push("/signup");
+  //   toast.error("Something went wrong, please try again");
+  //   return <SignUpForm />;
+  // }
+  return <DashboardContent />;
+};
+
+export default Dashboard;

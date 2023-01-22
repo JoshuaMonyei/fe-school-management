@@ -7,7 +7,8 @@ import { AdminPage } from "./pages/admin-page";
 import { CallbackPage } from "./pages/callback-page";
 import { HomePage } from "./pages/home-page";
 import { NotFoundPage } from "./pages/not-found-page";
-import { ProfilePage } from "./pages/profile-page";
+import { SignUpForm } from "./pages/signup-page";
+import Dashboard from "./components/dashboard/dashboard";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
 
@@ -25,7 +26,8 @@ export const App: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={HomePage} />
-      <ProtectedRoute path="/profile" component={ProfilePage} />
+      <ProtectedRoute path="/signup" component={SignUpForm} />
+      <ProtectedRoute path="/dashboard" component={Dashboard} />
       <Route path="/public" component={PublicPage} />
       <ProtectedRoute path="/protected" component={ProtectedPage} />
       <ProtectedRoute path="/admin" component={AdminPage} />

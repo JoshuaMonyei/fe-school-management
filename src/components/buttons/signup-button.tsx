@@ -9,7 +9,7 @@ export const SignupButton: React.FC = () => {
       prompt: "login",
       screen_hint: "signup",
       appState: {
-        returnTo: "/profile",
+        returnTo: "/signup",
       },
     });
   };

@@ -11,6 +11,9 @@ export const getPublicResource = async (): Promise<ApiResponse> => {
     headers: {
       "content-type": "application/json",
     },
+    data: {
+      
+    }
   };
 
   const { data, error } = (await callExternalApi({ config })) as ApiResponse;

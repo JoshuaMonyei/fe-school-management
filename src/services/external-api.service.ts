@@ -7,6 +7,7 @@ export const callExternalApi = async (options: {
 }): Promise<ApiResponse> => {
   try {
     const response: AxiosResponse = await axios(options.config);
+    console.log("response", response)
     const { data } = response;
 
     return {
@@ -18,7 +19,7 @@ export const callExternalApi = async (options: {
       const axiosError = error as AxiosError;
 
       const { response } = axiosError;
-
+      console.log("response", response)
       let message = "http request failed";
 
       if (response && response.statusText) {

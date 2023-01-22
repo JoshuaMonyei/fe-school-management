@@ -2,6 +2,6 @@ import { AppError } from "./app-error";
 import { Message } from "./message";
 
 export interface ApiResponse {
-  data: Message | null;
+  data: any;
   error: AppError | null;
 }
