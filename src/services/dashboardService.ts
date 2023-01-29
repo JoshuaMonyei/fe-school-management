@@ -10,7 +10,6 @@ export const getUserDetails = async (
     profile?: string;
   }
 ): Promise<ApiResponse> => {
-  console.log("called signup service", accessToken, body);
   const { profile: id } = body;
   const config: AxiosRequestConfig = {
     url: `${apiServerUrl}/api/get-user/${id}`,
@@ -22,7 +21,27 @@ export const getUserDetails = async (
   };
 
   const { data, error } = (await callExternalApi({ config })) as ApiResponse;
-  console.log("data from user details service", data);
+
+  return {
+    data,
+    error,
+  };
+};
+
+export const getDepartmentDetails = async (
+  id: string,
+  accessToken: string
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/get-department/${id}`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
 
   return {
     data,

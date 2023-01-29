@@ -7,8 +7,7 @@ import * as signUpService from "../services/signUpService";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 import { Paper, Card, Typography, makeStyles, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +58,7 @@ const initialFValues = {
   role: "student",
   gender: "",
   departmentId: "",
-  hireDate: new Date().toISOString().slice(0, 10),
+  admissionDate: new Date().toISOString().slice(0, 10),
 };
 
 export const SignUpForm: React.FC = () => {
@@ -202,9 +201,9 @@ export const SignUpForm: React.FC = () => {
                 error={errors.departmentId}
               />
               <Controls.DatePicker
-                name="hireDate"
-                label="Hire Date"
-                value={values.hireDate}
+                name="admissionDate"
+                label="Admission Date"
+                value={values.admissionDate}
                 onChange={handleInputChange}
               />
               <div>
@@ -213,13 +212,11 @@ export const SignUpForm: React.FC = () => {
                   text="Submit"
                   onClick={handleSubmit}
                 />
-                {/* <Controls.Button text="Reset" color="default" onClick={resetForm} /> */}
               </div>
             </Grid>
           </Grid>
         </Form>
       </Paper>
-      <ToastContainer />
     </PageLayout>
   );
 };

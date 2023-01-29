@@ -94,7 +94,8 @@
 }
 
 .page-footer-brand__logo {
-  width: 20px;
+  height: auto;
+  width: 40px;
   margin-right: 12px;
 }
 

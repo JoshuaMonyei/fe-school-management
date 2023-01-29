@@ -6,11 +6,19 @@ import { ProtectedRoute } from "./components/protected-route";
 import { AdminPage } from "./pages/admin-page";
 import { CallbackPage } from "./pages/callback-page";
 import { HomePage } from "./pages/home-page";
-import { NotFoundPage } from "./pages/not-found-page";
+import NotFoundPage from "./pages/404";
 import { SignUpForm } from "./pages/signup-page";
-import Dashboard from "./components/dashboard/dashboard";
-import { ProtectedPage } from "./pages/protected-page";
+import Dashboard from "./pages/dashboard";
+import Courses from "./pages/customers";
+import Account from "./pages/account";
+import Settings from "./pages/settings";
+import Payments from "./pages/products";
 import { PublicPage } from "./pages/public-page";
+import { LogoutButton } from "./components/buttons/logout-button";
+import { registerChartJs } from "./utils/register-chart-js";
+
+
+registerChartJs();
 
 export const App: React.FC = () => {
   const { isLoading } = useAuth0();
@@ -28,9 +36,13 @@ export const App: React.FC = () => {
       <Route path="/" exact component={HomePage} />
       <ProtectedRoute path="/signup" component={SignUpForm} />
       <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/courses" component={Courses} />
+      <ProtectedRoute path="/account" component={Account} />
+      <ProtectedRoute path="/payments" component={Payments} />
+      <ProtectedRoute path="/settings" component={Settings} />
       <Route path="/public" component={PublicPage} />
-      <ProtectedRoute path="/protected" component={ProtectedPage} />
       <ProtectedRoute path="/admin" component={AdminPage} />
+      <ProtectedRoute path="/logout" component={LogoutButton} />
       <Route path="/callback" component={CallbackPage} />
       <Route path="*" component={NotFoundPage} />
     </Switch>
