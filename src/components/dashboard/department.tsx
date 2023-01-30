@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Avatar,
-  Card,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { getDepartmentDetails } from "../../services/dashboardService";
 
@@ -16,8 +10,9 @@ export const Department: React.FC = (props: any) => {
       const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
       const departmentId = user.department_id;
       const token = window.sessionStorage.getItem("token") || "";
-      const department = await getDepartmentDetails(departmentId, token);
-      setDepartment(department.data.department_name);
+      const { data, error } = await getDepartmentDetails(departmentId, token);
+      window.sessionStorage.setItem("department", data.department_name);
+      setDepartment(data.department_name);
     };
 
     asyncCallback();

@@ -26,7 +26,7 @@ export const DashboardNavbar = (props: any) => {
   const settingsRef = useRef(null);
   const [openAccountPopover, setOpenAccountPopover] = useState(false);
   const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
-  const avatar = user.profile_pic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
+  const avatar = user?.profile_pic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
 
   return (
     <>

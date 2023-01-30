@@ -20,7 +20,7 @@ export const getUserDetails = async (
     },
   };
 
-  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+  const { data, error } = await callExternalApi({ config });
 
   return {
     data,
@@ -41,7 +41,58 @@ export const getDepartmentDetails = async (
     },
   };
 
-  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
+export const getCourses = async (
+  accessToken: string,
+  departmentId: string
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/get-subjects/${departmentId}`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
+
+export const updateUser = async (
+  accessToken: string,
+  user_id: string,
+  body: {
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    campus: string;
+    address: string;
+  },
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/get-user/${user_id}`,
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: body,
+  };
+
+  const { data, error } = await callExternalApi({ config });
 
   return {
     data,

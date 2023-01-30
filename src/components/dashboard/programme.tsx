@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
   Grid,
   Typography,
 } from "@mui/material";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import BadgeIcon from '@mui/icons-material/Badge';
+import BadgeIcon from "@mui/icons-material/Badge";
 
 export const Programme: React.FC = (props: any) => {
   const [studentId, setStudentId] = useState("");
+  const [role, setRole] = useState("");
   useEffect(() => {
     const asyncCallback = async () => {
       const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
       setStudentId(user.id.slice(0, 8));
+      setRole(user.role);
     };
 
     asyncCallback();
@@ -45,7 +45,7 @@ export const Programme: React.FC = (props: any) => {
                   mr: 1,
                 }}
               >
-                Student ID:
+                {role == "1" ? "Student ID:" : role == "2" ? "Staff ID:" : "Admin ID:"}
               </Typography>
               <Typography color="textSecondary" variant="subtitle2">
                 {studentId}

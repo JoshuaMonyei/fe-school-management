@@ -78,7 +78,6 @@ export const DashboardSidebar = (props: any) => {
     });
   };
   const [state, setState] = useState<any>("notLoaded");
-  console.log("state", state)
 
   useEffect(() => {
     if (open) {
@@ -98,10 +97,11 @@ export const DashboardSidebar = (props: any) => {
       console.log("data dashboard", data, error);
       if (error?.message === "Request failed with status code 404") {
         setState("error");
+      } else {
+        window.sessionStorage.setItem("user", JSON.stringify(data));
+        window.sessionStorage.setItem("token", accessToken);
+        window.sessionStorage.setItem("role", data.role);
       }
-      window.sessionStorage.setItem("user", JSON.stringify(data));
-      window.sessionStorage.setItem("token", accessToken);
-      window.sessionStorage.setItem("role", data.role);
       setState(data);
     };
 
@@ -158,12 +158,12 @@ export const DashboardSidebar = (props: any) => {
                   Darwin College
                 </Typography>
                 <Typography color="#9CA3AF" variant="body2">
-                  Your role : {" "}
-                  {
-                    (state.role == 1
-                      ? "Student"
-                      : (state.role == 2 ? "Staff" : "HOD"))
-                  }
+                  Your role :{" "}
+                  {state.role == 1
+                    ? "Student"
+                    : state.role == 2
+                    ? "Staff"
+                    : "HOD"}
                 </Typography>
               </div>
               <SelectorIcon

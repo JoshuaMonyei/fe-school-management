@@ -22,7 +22,6 @@ export const submitSignUpForm = async (
     address: string;
   }
 ): Promise<ApiResponse> => {
-  console.log("called signup service", accessToken, body);
   const {
     profile,
     firstName,
@@ -54,13 +53,13 @@ export const submitSignUpForm = async (
       auth0_user_id: sub,
       role: role,
       gender: gender,
-      mobile: mobile,
+      phone_number: mobile,
       address: address,
       profile_pic: picture,
     },
   };
 
-  const { data, error } = (await callExternalApi({ config })) as ApiResponse;
+  const { data, error } = await callExternalApi({ config });
   console.log("data from signup service", data);
 
   return {

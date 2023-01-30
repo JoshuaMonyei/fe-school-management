@@ -9,7 +9,7 @@ import { HomePage } from "./pages/home-page";
 import NotFoundPage from "./pages/404";
 import { SignUpForm } from "./pages/signup-page";
 import Dashboard from "./pages/dashboard";
-import Courses from "./pages/customers";
+import Courses from "./pages/courses";
 import Account from "./pages/account";
 import Settings from "./pages/settings";
 import Payments from "./pages/products";

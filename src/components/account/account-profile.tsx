@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -7,66 +7,63 @@ import {
   CardActions,
   CardContent,
   Divider,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
-};
+export const AccountProfile: React.FC = (props: any) => {
+  const [user, setUser] = useState<any>([]);
+  const [department, setDepartment] = useState<any>("");
 
-export const AccountProfile: React.FC = (props: any) => (
-  <Card {...props}>
-    <CardContent>
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
-        <Avatar
-          src={user.avatar}
+
+  useEffect(() => {
+    const asyncCallback = async () => {
+      const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
+      const accessToken = window.sessionStorage.getItem("token") || "";
+      const department = window.sessionStorage.getItem("department") || "";
+      // const { data, error } = await updateUser(accessToken, department_id);
+      // if (error) {
+      //   setUser([]);
+      // }
+      setUser(user);
+      setDepartment(department);
+    };
+    asyncCallback();
+  }, []);
+  return (
+    <Card {...props}>
+      <CardContent>
+        <Box
           sx={{
-            height: 64,
-            mb: 2,
-            width: 64
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
           }}
-        />
-        <Typography
-          color="textPrimary"
-          gutterBottom
-          variant="h5"
         >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {`${user.city} ${user.country}`}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.timezone}
-        </Typography>
-      </Box>
-    </CardContent>
-    <Divider />
-    <CardActions>
-      <Button
-        color="primary"
-        fullWidth
-        variant="text"
-      >
-        Upload picture
-      </Button>
-    </CardActions>
-  </Card>
-);
+          <Avatar
+            src={user.profile_pic}
+            sx={{
+              height: 64,
+              mb: 2,
+              width: 64,
+            }}
+          />
+          <Typography color="textPrimary" gutterBottom variant="h5">
+            {user.first_name + " " + user.last_name}
+          </Typography>
+          <Typography color="textSecondary" variant="subtitle2">
+            {`Gender: ${user.gender}`}
+          </Typography>
+          <Typography color="textSecondary" variant="subtitle2">
+            {`Department: ${department}`}
+          </Typography>
+        </Box>
+      </CardContent>
+      <Divider />
+      <CardActions>
+        <Button color="primary" fullWidth variant="text">
+          Upload picture
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
