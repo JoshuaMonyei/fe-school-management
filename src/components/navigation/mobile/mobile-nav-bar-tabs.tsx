@@ -18,19 +18,9 @@ export const MobileNavBarTabs: React.FC<MobileNavBarTabsProps> = ({
         <>
           <MobileNavBarTab
             path="/dashboard"
-            label="Profile"
+            label="Dashboard"
             handleClick={handleClick}
           />
-          {/* <MobileNavBarTab
-            path="/protected"
-            label="Protected"
-            handleClick={handleClick}
-          />
-          <MobileNavBarTab
-            path="/admin"
-            label="Admin"
-            handleClick={handleClick}
-          /> */}
         </>
       )}
     </div>

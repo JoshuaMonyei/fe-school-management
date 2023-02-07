@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { styled, ThemeProvider } from "@mui/material/styles";
 import { DashboardNavbar } from "./dashboard-navbar";
 import { DashboardSidebar } from "./dashboard-sidebar";
+import { ToastContainer } from "react-toastify";
 import { theme } from "../theme";
 
 const DashboardLayoutRoot = styled("div")(({ theme }) => ({
@@ -21,25 +22,32 @@ export const DashboardLayout = (props: any) => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box>
-      <DashboardLayoutRoot>
-        <Box
-          sx={{
-            display: "flex",
-            flex: "1 1 auto",
-            flexDirection: "column",
-            width: "100%",
-          }}
-        >
-          {children}
-        </Box>
-      </DashboardLayoutRoot>
-      <DashboardNavbar onSidebarOpen={() => isSidebarOpen === true ? setSidebarOpen(false): setSidebarOpen(true)} />
-      <DashboardSidebar
-        onClose={() => setSidebarOpen(false)}
-        open={isSidebarOpen}
-      />
-    </Box>
+      <ToastContainer />
+      <Box>
+        <DashboardLayoutRoot>
+          <Box
+            sx={{
+              display: "flex",
+              flex: "1 1 auto",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            {children}
+          </Box>
+        </DashboardLayoutRoot>
+        <DashboardNavbar
+          onSidebarOpen={() =>
+            isSidebarOpen === true
+              ? setSidebarOpen(false)
+              : setSidebarOpen(true)
+          }
+        />
+        <DashboardSidebar
+          onClose={() => setSidebarOpen(false)}
+          open={isSidebarOpen}
+        />
+      </Box>
     </ThemeProvider>
   );
 };

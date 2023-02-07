@@ -70,26 +70,48 @@ export const getCourses = async (
   };
 };
 
-
 export const updateUser = async (
   accessToken: string,
-  user_id: string,
+  userId: string,
   body: {
     first_name: string;
     last_name: string;
     phone_number: string;
     campus: string;
     address: string;
-  },
+  }
 ): Promise<ApiResponse> => {
   const config: AxiosRequestConfig = {
-    url: `${apiServerUrl}/api/get-user/${user_id}`,
+    url: `${apiServerUrl}/api/update-profile`,
     method: "POST",
     headers: {
       "content-type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
     data: body,
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
+export const updateUserPicture = async (
+  accessToken: string,
+  userId: string,
+  file: any
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/update-profile-picture`,
+    method: "PUT",
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: { file, user_id: userId },
   };
 
   const { data, error } = await callExternalApi({ config });

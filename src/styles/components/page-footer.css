@@ -74,15 +74,22 @@
 }
 
 .page-footer-info__resource-list {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+  align-items: center;
 
   /* responsive */
 
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 0.8rem;
+  column-gap: 10rem;
 }
 
 .page-footer-info__resource-list-item {
-  text-align: right;
+  text-align: center;
 }
 
 .page-footer-brand {
@@ -142,8 +149,8 @@
 
   .page-footer-info__resource-list {
     /* responsive */
-
-    grid-template-columns: 1fr 1fr;
+   display: flex;
+    /* flex-template-rows: 1fr 1fr; */
     row-gap: 3.2rem;
     column-gap: 3.2rem;
   }

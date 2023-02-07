@@ -59,7 +59,6 @@ export const AccountProfileDetails: React.FC = (props: any) => {
 
   const handleUpdateUser = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("herer updating profile")
     const { data, error } = await updateUser(token, user.id, values);
     if (error) {
       toast.error("Something went wrong, please try again");

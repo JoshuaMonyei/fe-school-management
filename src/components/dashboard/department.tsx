@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { getDepartmentDetails } from "../../services/dashboardService";
+import { PageLoader } from "../page-loader";
 
 export const Department: React.FC = (props: any) => {
   const [departmentName, setDepartment] = useState("");
@@ -17,31 +18,35 @@ export const Department: React.FC = (props: any) => {
 
     asyncCallback();
   }, []);
-  return (
-    <Card {...props}>
-      <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
-          <Grid item>
-            <Typography color="textSecondary" gutterBottom variant="overline">
-              Department
-            </Typography>
-            <Typography color="textPrimary" variant="h4">
-              {departmentName}
-            </Typography>
+
+  // if (departmentName === "") {
+  //   return <PageLoader />;
+  // } else {
+    return (
+      <Card {...props}>
+        <CardContent>
+          <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
+            <Grid item>
+              <Typography color="textSecondary" gutterBottom variant="overline">
+                Department
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                {departmentName}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Avatar
+                sx={{
+                  backgroundColor: "success.main",
+                  height: 56,
+                  width: 56,
+                }}
+              >
+                <PeopleIcon />
+              </Avatar>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Avatar
-              sx={{
-                backgroundColor: "success.main",
-                height: 56,
-                width: 56,
-              }}
-            >
-              <PeopleIcon />
-            </Avatar>
-          </Grid>
-        </Grid>
-        {/* <Box
+          {/* <Box
           sx={{
             alignItems: "center",
             display: "flex",
@@ -61,7 +66,8 @@ export const Department: React.FC = (props: any) => {
             Year One
           </Typography>
         </Box> */}
-      </CardContent>
-    </Card>
-  );
+        </CardContent>
+      </Card>
+    );
+  // }
 };

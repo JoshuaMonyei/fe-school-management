@@ -1,32 +1,38 @@
 import React from "react";
-import { Auth0Resource } from "../models/auth0-resource";
 import { PageFooterHyperlink } from "./page-footer-hyperlink";
 
 export const PageFooter = () => {
-  // const resourceList: Auth0Resource[] = [
-  //   {
-  //     path: "https://auth0.com/why-auth0/",
-  //     label: "Why Auth0",
-  //   },
-  //   {
-  //     path: "https://auth0.com/docs/get-started",
-  //     label: "How It Works",
-  //   },
-  //   {
-  //     path: "https://auth0.com/blog/developers/",
-  //     label: "Developer Blog",
-  //   },
-  //   {
-  //     path: "https://auth0.com/contact-us",
-  //     label: "Contact an Expert",
-  //   },
-  // ];
+  const resourceList = [
+    {
+      path: "https://github.com/JoshuaMonyei/fe-school-management",
+      label: "Student Resources",
+    },
+    {
+      path: "https://auth0.com/docs/get-started",
+      label: "How It Works",
+    },
+    {
+      path: "mailto:monyeijosh01@gmail.com",
+      label: "Contact Us",
+    },
+  ];
 
   return (
     <footer className="page-footer">
       <div className="page-footer-grid">
-        <div className="page-footer-grid__info">
+        <div className="page-footer-info__resource-list">
+          {resourceList.map((resource) => (
+            <div
+              key={resource.path}
+              className="page-footer-info__resource-list-item"
+            >
+              <PageFooterHyperlink path={resource.path}>
+                {resource.label}
+              </PageFooterHyperlink>
+            </div>
+          ))}
         </div>
+
         <div className="page-footer-grid__brand">
           <div className="page-footer-brand">
             <img

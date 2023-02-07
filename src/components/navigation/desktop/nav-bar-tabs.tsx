@@ -10,9 +10,7 @@ export const NavBarTabs: React.FC = () => {
       <NavBarTab path="/" label="Home" />
       {isAuthenticated && (
         <>
-          <NavBarTab path="/dashboard" label="Profile" />
-          {/* <NavBarTab path="/protected" label="Protected" />
-          <NavBarTab path="/admin" label="Admin" /> */}
+          <NavBarTab path="/dashboard" label="Dashboard" />
         </>
       )}
     </div>

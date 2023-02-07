@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { Bell as BellIcon } from "../icons/bell";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useSelector } from "react-redux";
 import { UserCircle as UserCircleIcon } from "../icons/user-circle";
 import { Users as UsersIcon } from "../icons/users";
 
@@ -25,8 +26,10 @@ export const DashboardNavbar = (props: any) => {
   const { onSidebarOpen, ...other } = props;
   const settingsRef = useRef(null);
   const [openAccountPopover, setOpenAccountPopover] = useState(false);
-  const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
+  // const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
+  const { user } = useSelector((state: any) => state.user);
   const avatar = user?.profile_pic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
+
 
   return (
     <>
@@ -74,7 +77,7 @@ export const DashboardNavbar = (props: any) => {
           <Tooltip title="Notifications">
             <IconButton sx={{ ml: 1 }}>
               <Badge badgeContent={4} color="primary" variant="dot">
-                <BellIcon fontSize="small" />
+                <NotificationsIcon fontSize="small" />
               </Badge>
             </IconButton>
           </Tooltip>

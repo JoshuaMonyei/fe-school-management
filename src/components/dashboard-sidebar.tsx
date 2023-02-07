@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -12,7 +13,7 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ChartBar as ChartBarIcon } from "../icons/chart-bar";
-import { Cog as CogIcon } from "../icons/cog";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Selector as SelectorIcon } from "../icons/selector";
 import { User as UserIcon } from "../icons/user";
 import { ThemeProvider } from "@mui/material/styles";
@@ -54,7 +55,7 @@ const items = [
   },
   {
     href: "/settings",
-    icon: <CogIcon fontSize="small" />,
+    icon: <SettingsIcon fontSize="small" />,
     title: "Settings",
   },
 ];
@@ -66,6 +67,8 @@ export const DashboardSidebar = (props: any) => {
     noSsr: false,
   });
   const history = useHistory();
+  const dispatch = useDispatch();
+  const updateUser = (user: any) => dispatch({ type: "UPDATE_USER", user });
   const { user, getAccessTokenSilently, logout } = useAuth0();
 
   if (!user) {
@@ -101,6 +104,7 @@ export const DashboardSidebar = (props: any) => {
         window.sessionStorage.setItem("user", JSON.stringify(data));
         window.sessionStorage.setItem("token", accessToken);
         window.sessionStorage.setItem("role", data.role);
+        updateUser(data);
       }
       setState(data);
     };
