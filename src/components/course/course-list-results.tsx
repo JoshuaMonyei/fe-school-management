@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import {
@@ -14,6 +14,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { toast } from "react-toastify";
+import { registerCourses } from "../../services/dashboardService";
 
 interface CourseListProps {
   courses: any;
@@ -26,6 +28,18 @@ export const CourseListResults: React.FC<CourseListProps> = ({
   const [selectedCourseIds, setSelectedCourseIds] = useState<string[]>([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [user, setUser] = useState<any>(null);
+  const [token, setToken] = useState<any>("");
+
+  useEffect(() => {
+    const asyncCallback = async () => {
+      const user = JSON.parse(window.sessionStorage.getItem("user") || "{}");
+      const accessToken = window.sessionStorage.getItem("token") || "";
+      setToken(accessToken);
+      setUser(user);
+    };
+    asyncCallback();
+  }, []);
 
   const handleSelectAll = (event: any) => {
     let newSelectedCourseIds;
@@ -77,6 +91,33 @@ export const CourseListResults: React.FC<CourseListProps> = ({
     setPage(newPage);
   };
 
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    console.log(selectedCourseIds);
+    if (selectedCourseIds.length < 4) {
+      toast.error("Please register all core courses");
+      return;
+    }
+    if (!user.tuitionPaid) {
+      toast.error("Please pay your tuition fee to register courses");
+      return;
+    }
+    const { error } = await registerCourses(token, {
+      student_id: user.id,
+      session_start_year: new Date().getFullYear(),
+      session_end_year: new Date().getFullYear() + 1,
+      department_id: user.department_id,
+      subject_ids: selectedCourseIds,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      window.location.reload();
+      toast.success("Courses registered successfully");
+    }
+  };
+
   return (
     <Box {...rest}>
       <Card {...rest}>
@@ -124,9 +165,6 @@ export const CourseListResults: React.FC<CourseListProps> = ({
                           display: "flex",
                         }}
                       >
-                        {/* <Avatar src={customer.avatarUrl} sx={{ mr: 2 }}>
-                        {getInitials(customer.name)}
-                      </Avatar> */}
                         <Typography color="textPrimary" variant="body1">
                           {course.subject_name}
                         </Typography>
@@ -135,9 +173,6 @@ export const CourseListResults: React.FC<CourseListProps> = ({
                     <TableCell>{course.credit_unit}</TableCell>
                     <TableCell>{course.course_type}</TableCell>
                     <TableCell>{course.course_code}</TableCell>
-                    {/* <TableCell>
-                    {format(customer.createdAt, "dd/MM/yyyy")}
-                  </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
@@ -161,7 +196,7 @@ export const CourseListResults: React.FC<CourseListProps> = ({
           m: 4,
         }}
       >
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={handleSubmit}>
           Submit Form
         </Button>
       </Box>

@@ -70,6 +70,49 @@ export const getCourses = async (
   };
 };
 
+export const registerCourses = async (
+  accessToken: string,
+  body: any
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/register-course`,
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: body,
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
+export const getRegisteredCourses = async (
+  accessToken: string,
+  userId: string
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/get-courses/${userId}`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
 export const updateUser = async (
   accessToken: string,
   userId: string,
