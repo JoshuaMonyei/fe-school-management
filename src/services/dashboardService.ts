@@ -73,14 +73,9 @@ export const getCourses = async (
 export const updateUser = async (
   accessToken: string,
   userId: string,
-  body: {
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    campus: string;
-    address: string;
-  }
+  body: any,
 ): Promise<ApiResponse> => {
+  console.log("body", body)
   const config: AxiosRequestConfig = {
     url: `${apiServerUrl}/api/update-profile`,
     method: "POST",
@@ -112,6 +107,28 @@ export const updateUserPicture = async (
       Authorization: `Bearer ${accessToken}`,
     },
     data: { file, user_id: userId },
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data,
+    error,
+  };
+};
+
+export const tuitionPayment = async (
+  accessToken: string,
+  amount: number
+): Promise<ApiResponse> => {
+  const config: AxiosRequestConfig = {
+    url: `${apiServerUrl}/api/create-payment-intent`,
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: { amount },
   };
 
   const { data, error } = await callExternalApi({ config });

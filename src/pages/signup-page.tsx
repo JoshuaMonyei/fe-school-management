@@ -121,10 +121,6 @@ export const SignUpForm: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log("values", values);
-  // }, [values.hireDate]);
-
   const icon = <PeopleOutlineTwoToneIcon fontSize="large" />;
   const title = "Sign Up Form";
   const subTitle = "Complete your registration";

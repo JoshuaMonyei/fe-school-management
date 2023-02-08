@@ -1,5 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import { CurrentSession } from "../components/dashboard/current-session";
 import { LatestOrders } from "../components/dashboard/latest-orders";
@@ -10,7 +9,6 @@ import { Department } from "../components/dashboard/department";
 import { Programme } from "../components/dashboard/programme";
 import { TrafficByDevice } from "../components/dashboard/traffic-by-device";
 import { DashboardLayout } from "../components/dashboard-layout";
-import { PageLoader } from "../components/page-loader";
 import { Helmet } from "react-helmet";
 
 const Page: React.FC = () => {

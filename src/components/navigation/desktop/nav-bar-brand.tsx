@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
+import { IconButton, Toolbar } from "@material-ui/core";
 import SchoolIcon from "@material-ui/icons/School";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     justifyContent: "center",

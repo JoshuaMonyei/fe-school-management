@@ -11,7 +11,9 @@ import Dashboard from "./pages/dashboard";
 import Courses from "./pages/courses";
 import Account from "./pages/account";
 import Settings from "./pages/settings";
-import Payments from "./pages/products";
+import Payments from "./pages/payment";
+import PaymentStatus from "./components/payment/payment-status";
+import PaymentSuccess from "./pages/payment-success";
 import { LogoutButton } from "./components/buttons/logout-button";
 import { registerChartJs } from "./utils/register-chart-js";
 import { Provider } from "react-redux";
@@ -30,8 +32,6 @@ export const App: React.FC = () => {
     );
   }
 
-
-
   return (
     <Provider store={Store}>
     <Switch>
@@ -41,6 +41,8 @@ export const App: React.FC = () => {
       <ProtectedRoute path="/courses" component={Courses} />
       <ProtectedRoute path="/account" component={Account} />
       <ProtectedRoute path="/payments" component={Payments} />
+      <ProtectedRoute path="/payment-status" component={PaymentStatus} />
+      <ProtectedRoute path="/payment-success" component={PaymentSuccess} />
       <ProtectedRoute path="/settings" component={Settings} />
       <ProtectedRoute path="/logout" component={LogoutButton} />
       <Route path="/callback" component={CallbackPage} />

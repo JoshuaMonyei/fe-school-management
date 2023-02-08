@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Box,
