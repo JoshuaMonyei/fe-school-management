@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { getDepartmentDetails } from "../../services/dashboardService";
-import { PageLoader } from "../page-loader";
 
 export const Department: React.FC = (props: any) => {
   const [departmentName, setDepartment] = useState("");
@@ -19,9 +18,6 @@ export const Department: React.FC = (props: any) => {
     asyncCallback();
   }, []);
 
-  // if (departmentName === "") {
-  //   return <PageLoader />;
-  // } else {
     return (
       <Card {...props}>
         <CardContent>
